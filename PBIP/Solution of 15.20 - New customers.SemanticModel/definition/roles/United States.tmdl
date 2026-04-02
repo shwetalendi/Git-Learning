@@ -1,0 +1,7 @@
+role 'United States'
+	modelPermission: read
+
+	tablePermission Customer = [CountryRegion] == "China"
+
+	annotation PBI_Id = f0ede5fa713b41859ed490c8c6ffab5b
+

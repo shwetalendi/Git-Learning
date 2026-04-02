@@ -1,0 +1,28 @@
+table Test
+	lineageTag: 3fce2f44-dee7-401c-b112-82909d627325
+
+	calculationGroup
+
+	measure '# Sales' = COUNTROWS ( Sales )
+		formatString: #,0
+		displayFolder: Measures
+		lineageTag: 31127da8-794a-4c44-8f75-130c56eb45f3
+
+	measure 'Sales Amount' = SUMX ( Sales, Sales[Quantity] * Sales[Net Price] )
+		formatString: #,0.00
+		displayFolder: Measures
+		lineageTag: da05da0c-f987-4e91-93bb-616a9ee27026
+
+	column Name
+		dataType: string
+		isHidden
+		lineageTag: cada219b-37a0-4f60-b65d-9078205f32ad
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 7071540c-4c05-4bfd-9af4-8db35120d248
+		sourceColumn: Ordinal
+

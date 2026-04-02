@@ -1,0 +1,225 @@
+table Sales
+	lineageTag: ff128c9e-3192-4748-b5fd-3aa76a260ee6
+
+	measure '# Customers' = DISTINCTCOUNT ( Sales[CustomerKey] )
+		formatString: #,0
+		lineageTag: d49ff833-550d-43d2-a158-4e10d9bebec7
+
+	measure '# New C' = ```
+			
+			VAR CurrentCustomers = VALUES ( Sales[CustomerKey] )
+			VAR FirstSelectedDate = MIN ( 'Date'[Date] )
+			VAR OldCustomers = 
+			    CALCULATETABLE ( 
+			        VALUES( Sales[CustomerKey] ), 
+			        'Date'[Date] < FirstSelectedDate 
+			    )
+			VAR NewCustomers = EXCEPT ( CurrentCustomers, OldCustomers )
+			VAR Result = COUNTROWS ( NewCustomers )
+			RETURN 
+			    Result
+			
+			```
+		formatString: #,0
+		lineageTag: 05db88a5-042d-4d13-b096-3d66d0f59acc
+
+	measure 'Sales New C' = ```
+			
+			VAR CurrentCustomers = VALUES ( Sales[CustomerKey] )
+			VAR FirstSelectedDate = MIN ( 'Date'[Date] )
+			VAR OldCustomers = 
+			    CALCULATETABLE ( 
+			        VALUES( Sales[CustomerKey] ), 
+			        'Date'[Date] < FirstSelectedDate 
+			    )
+			VAR NewCustomers = EXCEPT ( CurrentCustomers, OldCustomers )
+			VAR Result = CALCULATE ( [Sales Amount], NewCustomers )
+			RETURN 
+			    Result
+			
+			```
+		formatString: #,0.00
+		lineageTag: f3cce925-4f5f-40a5-9344-e4d3a5d2a005
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		lineageTag: 444d46e4-af56-41e4-9ec8-21e63c8a979c
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CustomerKey
+		dataType: int64
+		isHidden
+		lineageTag: 9b04470b-ffe3-401a-ad43-6d0eb47747d5
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column OrderDateKey
+		dataType: int64
+		isHidden
+		lineageTag: 18149b2d-5e60-4715-95d3-2c056de26bd6
+		summarizeBy: count
+		sourceColumn: OrderDateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Order Date'
+		dataType: dateTime
+		isHidden
+		formatString: mm/dd/yyyy
+		lineageTag: 9051af24-465d-4b38-b9c8-7024589d8fde
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Delivery Date'
+		dataType: dateTime
+		isHidden
+		formatString: mm/dd/yyyy
+		lineageTag: 0408177c-2a3c-47fe-b738-1da1b9074143
+		summarizeBy: none
+		sourceColumn: Delivery Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Order Number'
+		dataType: string
+		isHidden
+		lineageTag: 882d9740-c4f0-4809-886c-17cbc1c4585c
+		summarizeBy: none
+		sourceColumn: Order Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Order Line Number'
+		dataType: int64
+		isHidden
+		lineageTag: 84383a8a-95ba-47bf-a2f4-692ed9156bdf
+		summarizeBy: none
+		sourceColumn: Order Line Number
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: int64
+		formatString: #,0
+		lineageTag: a3a8409a-c11b-497f-b183-d8e016c475c4
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Price'
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		lineageTag: 287b3e94-e24d-4211-b184-71eb48ba6e4f
+		summarizeBy: none
+		sourceColumn: Unit Price
+
+		annotation SummarizationSetBy = User
+
+	column 'Unit Discount'
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		lineageTag: 3a6d5a6b-6e3f-4faf-8e70-5cf484405550
+		summarizeBy: none
+		sourceColumn: Unit Discount
+
+		annotation SummarizationSetBy = User
+
+	column 'Unit Cost'
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		lineageTag: d1b207b3-84ac-462c-8cef-e7560ed99da9
+		summarizeBy: none
+		sourceColumn: Unit Cost
+
+		annotation SummarizationSetBy = User
+
+	column 'Net Price'
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		lineageTag: 7cc1e3b8-517d-46af-a47d-7a3b7250fd5d
+		summarizeBy: none
+		sourceColumn: Net Price
+
+		annotation SummarizationSetBy = User
+
+	partition 'DaxBook Sales' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("Demo", "ContosoRetailDW"),
+				    DaxBook_Sales = Source{[Schema="DaxBook",Item="Sales"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(DaxBook_Sales,{"OnlineSalesKey", "Due Date", "DueDateKey", "DeliveryDateKey", "CurrencyKey", "PromotionKey", "StoreKey"})
+				in
+				    #"Removed Columns"
+
+		annotation IsQueryEditorUsed = False
+
+		annotation QueryEditorSerialization
+
+		annotation TableWidgetSerialization
+
+	annotation _TM_ExtProp_QueryDefinition = SELECT * FROM [Sales]
+
+	annotation _TM_ExtProp_DbTableName = 905
+
+	annotation IsQueryEditorUsed = False
+
+	annotation QueryEditorSerialization
+
+	annotation TableWidgetSerialization
+
+	annotation DataMarketWebBaseUrl
+
+	annotation DataMarketWebQueryUrl
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

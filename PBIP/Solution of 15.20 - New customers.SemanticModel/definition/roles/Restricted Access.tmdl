@@ -1,0 +1,8 @@
+role 'Restricted Access'
+	modelPermission: read
+
+	tablePermission Product
+		metadataPermission: none
+
+	annotation PBI_Id = 11aa79b7197c4372add39085bb3fc3d2
+
