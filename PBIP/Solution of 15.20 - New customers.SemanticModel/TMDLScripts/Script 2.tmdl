@@ -1,0 +1,14 @@
+createOrReplace
+
+	perspective Presp
+
+		perspectiveTable Test
+
+			perspectiveMeasure '# Sales'
+
+			perspectiveMeasure 'Sales Amount'
+
+		perspectiveTable Sales
+
+		  perspectiveMeasure '# Customers' 
+

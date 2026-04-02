@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Solution of 15.20 - New customers"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ba65d0e1-882f-4a81-a577-83aee9677337"
+  }
+}

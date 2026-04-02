@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Solution of 15.20 - New customers"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "bbd51f15-f58f-4f14-82ec-89e147f7245e"
+  }
+}

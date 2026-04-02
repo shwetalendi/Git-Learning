@@ -1,0 +1,253 @@
+table Customer
+	lineageTag: 01898080-22e7-42e1-b7cb-adff9f99bc0f
+
+	column CustomerKey
+		dataType: int64
+		isHidden
+		isNullable: false
+		lineageTag: fb86b7ed-45a7-4570-ae6b-e162c2d57b6f
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Name
+		dataType: string
+		lineageTag: 93c5c144-90cc-4f5b-8412-d74e2efe7776
+		summarizeBy: none
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Birth Date'
+		dataType: dateTime
+		isHidden
+		formatString: Short Date
+		lineageTag: b0c16dfb-80e2-4dc4-a9bd-321ba02f97b6
+		summarizeBy: none
+		sourceColumn: Birth Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Marital Status'
+		dataType: string
+		isHidden
+		lineageTag: 15dffa9e-1e3a-41d4-be5f-9ad02d9acb80
+		summarizeBy: none
+		sourceColumn: Marital Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Gender
+		dataType: string
+		lineageTag: 3a5ef6d6-05b2-47a0-9c8d-7c0d9dd0b37c
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Yearly Income'
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		lineageTag: d90c9604-d9cc-4aab-aba0-d2473f9554c1
+		summarizeBy: none
+		sourceColumn: Yearly Income
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Children'
+		dataType: int64
+		isHidden
+		lineageTag: 701b1857-3a46-448c-b3d1-2a4b822f10e0
+		summarizeBy: none
+		sourceColumn: Total Children
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Children At Home'
+		dataType: int64
+		isHidden
+		lineageTag: d8628b6f-be0f-4662-9558-d02319f0b094
+		summarizeBy: none
+		sourceColumn: Children At Home
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Education
+		dataType: string
+		lineageTag: a7b0cae6-0760-43d0-bf3f-6e21549a168f
+		summarizeBy: none
+		sourceColumn: Education
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Occupation
+		dataType: string
+		lineageTag: fb868678-c840-4a4f-931a-fb77219cdcc3
+		summarizeBy: none
+		sourceColumn: Occupation
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Continent
+		dataType: string
+		isHidden
+		lineageTag: 121a8ae9-e43b-46de-a336-df96b69df944
+		summarizeBy: none
+		sourceColumn: Continent
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column City
+		dataType: string
+		isHidden
+		lineageTag: 2d92cb39-6ae5-41db-9761-779063250830
+		summarizeBy: none
+		sourceColumn: City
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column State
+		dataType: string
+		isHidden
+		lineageTag: e983c69e-42bd-4b57-b930-62222727081e
+		summarizeBy: none
+		sourceColumn: State
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Address Line 1'
+		dataType: string
+		isHidden
+		lineageTag: ed3b2f52-17ca-4b74-a91c-9c4f6ef740bd
+		summarizeBy: none
+		sourceColumn: Address Line 1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Customer Type'
+		dataType: string
+		isHidden
+		lineageTag: d5f6822e-e78f-4b97-bfaf-4b57be8f1472
+		summarizeBy: none
+		sourceColumn: Customer Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column CountryRegion
+		dataType: string
+		isHidden
+		lineageTag: ff08ff02-310b-4e14-b5ca-c3cb4467480f
+		summarizeBy: none
+		sourceColumn: CountryRegion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	hierarchy Geography
+		lineageTag: 713c6d22-ff2b-4dcf-aea2-f6b5707b9a06
+
+		level Continent
+			lineageTag: 4263a8b9-2d99-4c2b-9706-2791e4bdd410
+			column: Continent
+
+		level Country
+			lineageTag: bfe609d8-9824-445c-be9c-e49119e53083
+			column: CountryRegion
+
+		level State
+			lineageTag: a57fae5e-4dab-4975-80bb-67fc8219a5f5
+			column: State
+
+		level City
+			lineageTag: 3dba452b-f0b0-444a-8e85-3d2333c2d008
+			column: City
+
+	partition 'DaxBook Customer' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("Demo", "ContosoRetailDW"),
+				    DaxBook_Customer = Source{[Schema="DaxBook",Item="Customer"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(DaxBook_Customer,{"GeographyKey", "Title", "Customer Code", "Phone", "Address Line 2", "Date First Purchase", "House Ownership", "Cars Owned", "Company Name"})
+				in
+				    #"Removed Columns"
+
+		annotation IsQueryEditorUsed = False
+
+		annotation QueryEditorSerialization
+
+		annotation TableWidgetSerialization
+
+	annotation _TM_ExtProp_QueryDefinition = SELECT * FROM [Customer]
+
+	annotation _TM_ExtProp_DbTableName = 63
+
+	annotation IsQueryEditorUsed = False
+
+	annotation QueryEditorSerialization
+
+	annotation TableWidgetSerialization
+
+	annotation DataMarketWebBaseUrl
+
+	annotation DataMarketWebQueryUrl
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
